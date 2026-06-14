@@ -576,6 +576,7 @@ GameObject:
   m_Component:
   - component: {fileID: 852288404}
   - component: {fileID: 852288403}
+  - component: {fileID: 852288405}
   m_Layer: 0
   m_Name: Lane_1
   m_TagString: Untagged
@@ -626,6 +627,26 @@ Transform:
   - {fileID: 1681778557}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &852288405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 852288402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ff1dfcb2b30123acb84961d398238f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Lane
+  spawnPoint: {fileID: 929439941}
+  backLine: {fileID: 454605399}
+  defenderSlots:
+  - {fileID: 243737473}
+  - {fileID: 84550235}
+  - {fileID: 1343200187}
+  - {fileID: 1612620421}
+  - {fileID: 1681778557}
 --- !u!1 &929439940
 GameObject:
   m_ObjectHideFlags: 0
@@ -1061,6 +1082,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1560702166}
   - component: {fileID: 1560702165}
+  - component: {fileID: 1560702167}
   m_Layer: 0
   m_Name: Lane_3
   m_TagString: Untagged
@@ -1111,6 +1133,26 @@ Transform:
   - {fileID: 11523143}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1560702167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1560702164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ff1dfcb2b30123acb84961d398238f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Lane
+  spawnPoint: {fileID: 825995576}
+  backLine: {fileID: 1726803255}
+  defenderSlots:
+  - {fileID: 1652160760}
+  - {fileID: 478810821}
+  - {fileID: 1912905885}
+  - {fileID: 231811095}
+  - {fileID: 11523143}
 --- !u!1 &1612620420
 GameObject:
   m_ObjectHideFlags: 0
@@ -1276,6 +1318,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2104203752}
   - component: {fileID: 2104203751}
+  - component: {fileID: 2104203753}
   m_Layer: 0
   m_Name: Lane_2
   m_TagString: Untagged
@@ -1326,6 +1369,26 @@ Transform:
   - {fileID: 1358457085}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2104203753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2104203750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ff1dfcb2b30123acb84961d398238f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Lane
+  spawnPoint: {fileID: 373611690}
+  backLine: {fileID: 991421970}
+  defenderSlots:
+  - {fileID: 252388739}
+  - {fileID: 472322419}
+  - {fileID: 1034034058}
+  - {fileID: 1375517321}
+  - {fileID: 1358457085}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
