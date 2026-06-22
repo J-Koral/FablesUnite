@@ -20,6 +20,30 @@ public class Unit : MonoBehaviour
     [Tooltip("If set, this unit auto-joins that lane on start. Used for units you drop into the scene by hand. Spawned units leave this empty.")]
     [SerializeField] private Lane startingLane;
 
+     [Header("Data (set at spawn)")]
+    public FableDefinition definition;
+
+    // Call this right after spawning to stamp stats from data.
+    public void Configure(FableDefinition def, int level, int stars)
+    {
+        definition = def;
+        team = def.team;
+        element = def.element;
+
+        float mult = (1f + def.perLevelGain * (level - 1)) * (1f + def.perStarGain * (stars - 1));
+        maxHealth = def.baseHealth * mult;
+        attackDamage = def.baseDamage * mult;
+        attacksPerSecond = def.attacksPerSecond;
+        attackRange = def.attackRange;
+
+        // re-apply health since Awake already ran on a spawned object
+        SendMessage("ResetHealth", SendMessageOptions.DontRequireReceiver);
+    }
+
+   // Add a tiny helper so health refreshes after configuring:
+   private void ResetHealth() { currentHealth = maxHealth; }
+
+
     public Lane Lane { get; private set; }
     public bool IsAlive => currentHealth > 0f;
 

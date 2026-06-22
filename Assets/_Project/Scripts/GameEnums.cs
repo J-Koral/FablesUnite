@@ -12,3 +12,11 @@ public enum Team
     Defender, // your Fables
     Attacker  // Dr. Vex's army
 }
+
+public enum Rarity
+{
+    Common,
+    Rare,
+    Epic,
+    Legendary
+}
