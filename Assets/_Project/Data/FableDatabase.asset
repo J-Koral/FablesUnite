@@ -12,4 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d8eaef9000b92a0ab7002975ef6e422, type: 3}
   m_Name: FableDatabase
   m_EditorClassIdentifier: Assembly-CSharp::FableDatabase
-  all: []
+  all:
+  - {fileID: 11400000, guid: b88da2f3079de93ec95858402e8f5bf5, type: 2}
+  - {fileID: 11400000, guid: 29da5e051823ae297bc87a192c37a1e0, type: 2}
+  - {fileID: 11400000, guid: 2afba2e5e1ca305d9a324bb09abb02f2, type: 2}
+  - {fileID: 11400000, guid: d7c407faf9a64c6fa9d90141304d1cbe, type: 2}
+  - {fileID: 11400000, guid: 9c35896c3a7e8a2449fb0ee490daeb3e, type: 2}
