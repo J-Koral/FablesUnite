@@ -4,6 +4,9 @@ public class TreeController : MonoBehaviour
 {
     public TreeConfig config;
 
+    [Tooltip("Minigame spots hit during a hold are counted here, played after the burst.")]
+    public int pendingMinigames = 0;
+
     // Spend one token and resolve one spot. Returns the chosen spot, or null if broke.
     public TreeSpot Pull()
     {
@@ -39,7 +42,7 @@ public class TreeController : MonoBehaviour
             case TreeRewardType.FableShards: AddShards(s.amount); break;
             case TreeRewardType.Xp:          AddXpToAll(s.amount); break;
             case TreeRewardType.Fable:       GrantFable(s.fable); break;
-            case TreeRewardType.Minigame:    /* queued for after the burst (Stage 7 juice) */ break;
+            case TreeRewardType.Minigame:    pendingMinigames++; break;   // queued, not interrupting
         }
 
         // pity advances on every non-Fable pull, resets on a Fable
@@ -67,4 +70,3 @@ public class TreeController : MonoBehaviour
         foreach (var o in GameData.I.player.roster) o.xp += n;
     }
 }
-
