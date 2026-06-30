@@ -16,7 +16,15 @@ public class TreePullButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
         held = true; firedThisHold = 0; timer = 0f;
         DoPull();                    // first pull is instant
     }
-    public void OnPointerUp(PointerEventData e) => held = false;
+    public void OnPointerUp(PointerEventData e)
+    {
+        held = false;
+        if (tree.pendingMinigames > 0)
+        {
+            Debug.Log($"{tree.pendingMinigames} minigame(s) to play!");
+            tree.pendingMinigames = 0;   // later: open the minigame screen here
+        }
+    }
 
     private void Update()
     {
