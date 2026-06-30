@@ -53,13 +53,22 @@ public class BattleManager : MonoBehaviour
         }
     }
 
-    private void EndBattle(bool won)
+   private void EndBattle(bool won)
     {
         CurrentState = won ? BattleState.Win : BattleState.Lose;
         Time.timeScale = 1f;
+
+        if (won && GameData.I != null)          // <-- add this block
+        {
+            GameData.I.player.treeTokens   += 5;
+            GameData.I.player.gold         += 50;
+            GameData.I.player.chapterLevel += 1;   // advance the campaign
+        }
+
         if (resultUI != null) resultUI.SetActive(true);
         if (resultText != null) resultText.text = won ? "VICTORY" : "DEFEAT";
     }
+
 
     private void EnterDeploy()
     {
@@ -81,4 +90,7 @@ public class BattleManager : MonoBehaviour
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+
+    public void GoHome() => SceneManager.LoadScene("Home");
+
 }
