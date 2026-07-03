@@ -25,6 +25,7 @@ public class FableDetailPanel : MonoBehaviour
                          $"DMG {FableStats.Damage(def, current.level, current.stars):0}";
         reqText.text   = $"XP {current.xp}/{FableUpgrade.XpPerLevel}    " +
                          $"Shards {current.shards}/{FableUpgrade.ShardsPerStar}";
+        if (GameData.I != null) GameData.I.Save();
     }
 
     public void OnFeed()   { if (FableUpgrade.TryLevelUp(current)) Refresh(); }

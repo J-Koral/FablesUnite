@@ -11,11 +11,19 @@ public class GameData : MonoBehaviour
 
     private void Awake()
     {
-        if (I != null) { Destroy(gameObject); return; }  // only one survives
+        if (I != null) { Destroy(gameObject); return; }
         I = this;
-        DontDestroyOnLoad(gameObject);                    // persists across scenes
-        if (player.roster.Count == 0) GiveStarterRoster();
+        DontDestroyOnLoad(gameObject);
+
+        var loaded = SaveSystem.Load();          // <-- load first
+        if (loaded != null) player = loaded;
+        else if (player.roster.Count == 0) GiveStarterRoster();
     }
+
+    public void Save() => SaveSystem.Save(player);
+    private void OnApplicationPause(bool paused) { if (paused) Save(); }
+    private void OnApplicationQuit() => Save();
+
 
     private void GiveStarterRoster()
     {

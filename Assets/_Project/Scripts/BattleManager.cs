@@ -63,6 +63,7 @@ public class BattleManager : MonoBehaviour
             GameData.I.player.treeTokens   += 5;
             GameData.I.player.gold         += 50;
             GameData.I.player.chapterLevel += 1;   // advance the campaign
+            GameData.I.Save();
         }
 
         if (resultUI != null) resultUI.SetActive(true);

@@ -48,6 +48,8 @@ public class TreeController : MonoBehaviour
         // pity advances on every non-Fable pull, resets on a Fable
         if (s.type == TreeRewardType.Fable) p.pityCounter = 0;
         else p.pityCounter++;
+
+        GameData.I.Save();
     }
 
     private void GrantFable(FableDefinition def)
