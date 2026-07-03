@@ -60,6 +60,14 @@ public class WaveSpawner : MonoBehaviour
         Unit unit = go.GetComponent<Unit>();
         unit.team = Team.Attacker;
         unit.element = spawn.element;
+
+        if (GameData.I != null)
+        {
+            float mult = 1f + 0.12f * (GameData.I.player.chapterLevel - 1);
+            unit.maxHealth *= mult;
+            unit.SendMessage("ResetHealth", UnityEngine.SendMessageOptions.DontRequireReceiver);
+        }
+        
         unit.AssignLane(lane);
     }
 
