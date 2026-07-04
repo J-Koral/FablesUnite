@@ -24,5 +24,5 @@ MonoBehaviour:
   perLevelGain: 0.08
   perStarGain: 0.15
   evolvesInto: {fileID: 0}
-  art: {fileID: 0}
+  art: {fileID: 21300000, guid: 02c3f8d64d3dc65bda42459471897d0c, type: 3}
   placeholderColor: {r: 1, g: 1, b: 1, a: 1}
