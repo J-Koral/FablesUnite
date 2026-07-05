@@ -17,7 +17,7 @@ public class SceneLoader : MonoBehaviour
         if (I != null) { Destroy(gameObject); return; }   // duplicate self-destructs
         I = this;
         DontDestroyOnLoad(gameObject);
-        if (fader != null) fader.alpha = 0f;
+        if (fader != null) { fader.alpha = 0f; fader.blocksRaycasts = false; }
     }
 
     // Call this from any nav button.
