@@ -1,33 +1,34 @@
-using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 public class TreePanelUI : MonoBehaviour
 {
     [Header("References")]
-    public TreeView treeView;          // to find the landed node + its position
+    public TreeView treeView;
     public TMP_Text tokenLabel;
-    public TMP_Text resultBanner;      // optional; leave unwired if unused
+    public TMP_Text resultBanner;      // optional
 
-    [Header("Fly-to-collect")]
-    public RectTransform flyIcon;      // a small icon that flies; starts hidden
+    [Header("Marching-ants collect")]
+    public FlyMote flyMotePrefab;      // the small UI-image prefab
+    public Transform flyLayer;         // Canvas child that holds spawned motes
+    public int moteCount = 8;
+    public float moteStagger = 0.06f;  // gap between motes → the "marching" trail
+    public float moteDuration = 0.5f;
 
     [Header("Fly destinations (drag counters OR nav buttons)")]
-    public RectTransform campTarget;      // Gold flies here (Camp button)
+    public RectTransform campTarget;      // Gold -> Camp button
     public RectTransform tokenTarget;     // Tree Tokens -> top-bar token counter
     public RectTransform turfWarsTarget;  // Raid Coins -> Turf Wars button
     public RectTransform rosterTarget;    // Fables + Shards -> Roster button
 
     public void ShowResult(TreeSpot s)
     {
-        if (s.rarity >= Rarity.Rare) Handheld.Vibrate();   // no-op in editor, fine
+        if (s.rarity >= Rarity.Rare) Handheld.Vibrate();
 
-        // Which spot did we land on? spots are shared objects, so IndexOf finds it.
         int index = (treeView != null && treeView.config != null)
             ? treeView.config.spots.IndexOf(s) : -1;
 
-        if (treeView != null && index >= 0) treeView.PlayLanding(index);   // B4: glow
+        if (treeView != null && index >= 0) treeView.PlayLanding(index);
 
         if (resultBanner != null)
         {
@@ -35,18 +36,17 @@ public class TreePanelUI : MonoBehaviour
             resultBanner.color = RarityColors.Of(s.rarity);
         }
 
-        // B5: fly the reward from the tree spot to where it's used.
         RectTransform target = TargetFor(s.type);
-        Vector3 start = (treeView != null && index >= 0)
-            ? treeView.GetSpotWorldPos(index)
-            : transform.position;
-        if (flyIcon != null && target != null)
-            StartCoroutine(Fly(start, target, RarityColors.Of(s.rarity)));
+        if (target != null && treeView != null && index >= 0)
+        {
+            Vector3 start = treeView.GetSpotWorldPos(index);
+            Sprite icon   = treeView.GetSpotSprite(index);
+            SpawnBurst(icon, start, target);
+        }
 
         RefreshTokens();
     }
 
-    // Routes each reward type to the button or counter it belongs to.
     private RectTransform TargetFor(TreeRewardType type)
     {
         switch (type)
@@ -56,30 +56,19 @@ public class TreePanelUI : MonoBehaviour
             case TreeRewardType.RaidCoins:   return turfWarsTarget;
             case TreeRewardType.Fable:       return rosterTarget;
             case TreeRewardType.FableShards: return rosterTarget;
-            default:                         return null;   // Xp, Minigame just glow
+            default:                         return null;   // Xp, Minigame: no fly
         }
     }
 
-    private IEnumerator Fly(Vector3 start, RectTransform target, Color color)
+    private void SpawnBurst(Sprite icon, Vector3 start, RectTransform target)
     {
-        Image img = flyIcon.GetComponent<Image>();
-        if (img != null) img.color = color;
-        flyIcon.gameObject.SetActive(true);
-        flyIcon.position = start;
-
+        if (flyMotePrefab == null || flyLayer == null) return;
         Vector3 end = target.position;
-        float t = 0f, dur = 0.45f;
-        while (t < dur)
+        for (int i = 0; i < moteCount; i++)
         {
-            t += Time.unscaledDeltaTime;
-            float k = t / dur;
-            flyIcon.position   = Vector3.Lerp(start, end, k);
-            flyIcon.localScale = Vector3.one * Mathf.Lerp(1f, 0.05f, k);  // shrinks into the button
-            yield return null;
+            FlyMote mote = Instantiate(flyMotePrefab, flyLayer);
+            mote.Launch(icon, start, end, i * moteStagger, moteDuration);  // staggered = marching line
         }
-        flyIcon.gameObject.SetActive(false);
-        flyIcon.localScale = Vector3.one;   // reset for next time
-        RefreshTokens();
     }
 
     public void RefreshTokens()

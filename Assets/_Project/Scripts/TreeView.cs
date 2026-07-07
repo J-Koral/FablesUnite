@@ -4,7 +4,7 @@ using UnityEngine;
 public class TreeView : MonoBehaviour
 {
     public TreeConfig config;
-    public RectTransform[] spotAnchors;   // the Anchor_0..N you placed on the tree
+    public RectTransform[] spotAnchors;
     public TreeSpotUI spotPrefab;
     public TreeIconLibrary icons;
 
@@ -22,24 +22,29 @@ public class TreeView : MonoBehaviour
         for (int i = 0; i < count; i++)
         {
             TreeSpotUI node = Instantiate(spotPrefab, spotAnchors[i]);
-            node.transform.localPosition = Vector3.zero;   // sit exactly on the anchor
+            node.transform.localPosition = Vector3.zero;
             node.Bind(config.spots[i], total, icons);
             nodes.Add(node);
         }
     }
 
-    // Light up the spot a pull landed on.
     public void PlayLanding(int spotIndex)
     {
         if (spotIndex >= 0 && spotIndex < nodes.Count && nodes[spotIndex] != null)
             nodes[spotIndex].PlayLanding();
     }
 
-    // Where a spot's node is on screen (used as the fly-from point).
     public Vector3 GetSpotWorldPos(int spotIndex)
     {
         if (spotIndex >= 0 && spotIndex < nodes.Count && nodes[spotIndex] != null)
             return nodes[spotIndex].transform.position;
         return transform.position;
+    }
+
+    public Sprite GetSpotSprite(int spotIndex)   // NEW: the picture on that spot
+    {
+        if (spotIndex >= 0 && spotIndex < nodes.Count && nodes[spotIndex] != null)
+            return nodes[spotIndex].IconSprite;
+        return null;
     }
 }
