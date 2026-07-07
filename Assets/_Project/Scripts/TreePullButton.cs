@@ -10,11 +10,14 @@ public class TreePullButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     [Header("Keyboard-style repeat")]
     public float initialDelay = 0.5f;     // pause after the first pull before spamming
     public float repeatInterval = 0.12f;  // spam speed while held
+    public int maxPullsPerHold = 15;       // cap per press-and-hold
 
     private Coroutine repeatRoutine;
+    private int pullsThisHold;
 
     public void OnPointerDown(PointerEventData e)
     {
+        pullsThisHold = 0;                               // fresh count each press
         DoPull();                                        // exactly ONE pull on press
         repeatRoutine = StartCoroutine(RepeatAfterDelay());
     }
@@ -33,8 +36,8 @@ public class TreePullButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
     private IEnumerator RepeatAfterDelay()
     {
-        yield return new WaitForSeconds(initialDelay);   // the "hold pause", like a keyboard
-        while (true)
+        yield return new WaitForSeconds(initialDelay);   // the "hold pause"
+        while (pullsThisHold < maxPullsPerHold)          // stop at the cap
         {
             DoPull();
             yield return new WaitForSeconds(repeatInterval);
@@ -44,8 +47,10 @@ public class TreePullButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     private void DoPull()
     {
         if (tree == null) return;
+        if (pullsThisHold >= maxPullsPerHold) return;    // safety: never exceed the cap
         TreeSpot spot = tree.Pull();
         if (spot == null) return;                        // out of tokens: stop quietly
+        pullsThisHold++;                                 // only count successful pulls
         if (ui != null) ui.ShowResult(spot);
     }
 }
