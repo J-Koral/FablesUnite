@@ -760,8 +760,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TreeView
   config: {fileID: 11400000, guid: 9136fd9815891c012856a2791099a805, type: 2}
-  content: {fileID: 0}
-  spotPrefab: {fileID: 7159952973379813284, guid: a7e895847a5872f0d89a8edba9920e66, type: 3}
+  spotAnchors:
+  - {fileID: 798482463}
+  - {fileID: 1330198870}
+  - {fileID: 143638114}
+  - {fileID: 1249608312}
+  - {fileID: 13377117}
+  - {fileID: 599562147}
+  - {fileID: 539771723}
+  - {fileID: 1907845444}
+  - {fileID: 216393432}
+  - {fileID: 1376396095}
+  - {fileID: 914159298}
+  - {fileID: 1860336058}
+  spotPrefab: {fileID: 6947655358426751832, guid: a7e895847a5872f0d89a8edba9920e66, type: 3}
+  icons: {fileID: 550904907}
 --- !u!114 &470853984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -838,6 +851,61 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 539771722}
   m_CullTransparentMesh: 1
+--- !u!1 &550904905
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 550904906}
+  - component: {fileID: 550904907}
+  m_Layer: 5
+  m_Name: TreeIcons
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &550904906
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 550904905}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1849432070}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &550904907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 550904905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f81d793e9a61d82e9f46ef833ef3860, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TreeIconLibrary
+  gold: {fileID: 21300000, guid: e079dd68a70047a24a1847d00ffb7ccf, type: 3}
+  xp: {fileID: 21300000, guid: 0d186688ac5ca54c0a5780adf609a742, type: 3}
+  treeTokens: {fileID: 21300000, guid: 69a4cb6bca12b4a64b55592c1b7df2db, type: 3}
+  raidCoins: {fileID: 21300000, guid: 95ba071fa54e57a7f8efdcc028d609e4, type: 3}
+  fableShards: {fileID: 21300000, guid: 163a4d5f24e3a982e9c0037252123a26, type: 3}
+  fable: {fileID: 21300000, guid: 277250a7c1975dfcaaa349c49bd27466, type: 3}
+  minigame: {fileID: 21300000, guid: 75b716c0c8b60dddf96336c8c65e26e8, type: 3}
 --- !u!1 &570684056
 GameObject:
   m_ObjectHideFlags: 0
@@ -2433,6 +2501,7 @@ RectTransform:
   - {fileID: 570684057}
   - {fileID: 157206087}
   - {fileID: 971618210}
+  - {fileID: 550904906}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
