@@ -220,6 +220,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 664cc47ea96af2f46b7a55afb34c11a0, type: 3}
+--- !u!224 &96848379 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5518136089841387815, guid: 4187a727dcdec4d3284c332655d38809, type: 3}
+  m_PrefabInstance: {fileID: 8111864172583559630}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &106564758
 GameObject:
   m_ObjectHideFlags: 0
@@ -1961,6 +1966,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!224 &1169614949 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1957442258111950776, guid: 4187a727dcdec4d3284c332655d38809, type: 3}
+  m_PrefabInstance: {fileID: 8111864172583559630}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1249608311
 GameObject:
   m_ObjectHideFlags: 0
@@ -2569,12 +2579,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a1205fe6a974cc98bdc8ba1744a341, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TreePanelUI
+  treeView: {fileID: 1728324352}
   tokenLabel: {fileID: 1507212238}
   resultBanner: {fileID: 1988536697}
   flyIcon: {fileID: 878880898}
-  goldTarget: {fileID: 0}
-  tokenTarget: {fileID: 0}
-  coinTarget: {fileID: 0}
+  campTarget: {fileID: 1169614949}
+  tokenTarget: {fileID: 1358797162}
+  turfWarsTarget: {fileID: 1788024881}
+  rosterTarget: {fileID: 96848379}
 --- !u!114 &1728324352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2631,6 +2643,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::OddsPopup
   root: {fileID: 724716515}
   text: {fileID: 911486807}
+--- !u!224 &1788024881 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7854373962124013274, guid: 4187a727dcdec4d3284c332655d38809, type: 3}
+  m_PrefabInstance: {fileID: 8111864172583559630}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1849432066
 GameObject:
   m_ObjectHideFlags: 0
