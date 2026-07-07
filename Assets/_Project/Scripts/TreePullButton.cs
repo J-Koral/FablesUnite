@@ -1,43 +1,51 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class TreePullButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     public TreeController tree;
-    public TreePanelUI ui;          // shows the result (Stage 7)
-    public float interval = 0.12f;  // time between auto-pulls while holding
+    public TreePanelUI ui;
 
-    private bool held;
-    private int firedThisHold;
-    private float timer;
+    [Header("Keyboard-style repeat")]
+    public float initialDelay = 0.5f;     // pause after the first pull before spamming
+    public float repeatInterval = 0.12f;  // spam speed while held
+
+    private Coroutine repeatRoutine;
 
     public void OnPointerDown(PointerEventData e)
     {
-        held = true; firedThisHold = 0; timer = 0f;
-        DoPull();                    // first pull is instant
+        DoPull();                                        // exactly ONE pull on press
+        repeatRoutine = StartCoroutine(RepeatAfterDelay());
     }
+
     public void OnPointerUp(PointerEventData e)
     {
-        held = false;
-        if (tree.pendingMinigames > 0)
+        if (repeatRoutine != null) StopCoroutine(repeatRoutine);
+        repeatRoutine = null;
+
+        if (tree != null && tree.pendingMinigames > 0)   // present queued minigames on release
         {
-            Debug.Log($"{tree.pendingMinigames} minigame(s) to play!");
-            tree.pendingMinigames = 0;   // later: open the minigame screen here
+            Debug.Log(tree.pendingMinigames + " minigame(s) to play!");
+            tree.pendingMinigames = 0;
         }
     }
 
-    private void Update()
+    private IEnumerator RepeatAfterDelay()
     {
-        if (!held || firedThisHold >= 15) return;
-        timer -= Time.unscaledDeltaTime;
-        if (timer <= 0f) { DoPull(); timer = interval; }
+        yield return new WaitForSeconds(initialDelay);   // the "hold pause", like a keyboard
+        while (true)
+        {
+            DoPull();
+            yield return new WaitForSeconds(repeatInterval);
+        }
     }
 
     private void DoPull()
     {
-        var spot = tree.Pull();
-        if (spot == null) { held = false; return; }   // out of tokens
-        firedThisHold++;
+        if (tree == null) return;
+        TreeSpot spot = tree.Pull();
+        if (spot == null) return;                        // out of tokens: stop quietly
         if (ui != null) ui.ShowResult(spot);
     }
 }
