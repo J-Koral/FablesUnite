@@ -27,13 +27,13 @@ public class FableCardUI : MonoBehaviour
 
         if (elementIcon != null && elementIcons != null) elementIcon.sprite = elementIcons.Get(def.element);
         if (rarityLetter != null) rarityLetter.text = RarityLetter(def.rarity);
-        if (starsText != null)    starsText.text = new string('\u2605', Mathf.Clamp(owned.stars, 0, 6));
+        if (starsText != null) starsText.text = new string('*', Mathf.Clamp(owned.stars, 0, 6));
         if (shardBar != null)     shardBar.fillAmount = Mathf.Clamp01(owned.shards / (float)FableUpgrade.ShardsPerStar);
     }
-
+    
     private string RarityLetter(Rarity r)
     {
-        switch (r)
+    switch (r)
         {
             case Rarity.Common:    return "C";
             case Rarity.Rare:      return "R";

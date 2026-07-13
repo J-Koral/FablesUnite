@@ -2054,20 +2054,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FableDetailPanel
   panelRoot: {fileID: 2000009311}
+  bgTint: {fileID: 0}
   artImage: {fileID: 885688236}
   elementIcon: {fileID: 569865949}
-  rarityFrame: {fileID: 735970810}
   nameText: {fileID: 344524741}
-  statsText: {fileID: 384909142}
+  starsText: {fileID: 974993428}
+  ratingText: {fileID: 0}
   elementIcons: {fileID: 1422350304}
-  feedButton: {fileID: 1916672155}
+  hpText: {fileID: 0}
+  dmgText: {fileID: 0}
+  spdText: {fileID: 0}
+  feedPanel: {fileID: 0}
+  skillPanel: {fileID: 0}
+  evolutionPanel: {fileID: 0}
   levelText: {fileID: 331402516}
   xpText: {fileID: 1087287475}
-  starButton: {fileID: 529434906}
-  starsText: {fileID: 974993428}
+  feedButton: {fileID: 1916672155}
+  starsLineText: {fileID: 0}
   shardsText: {fileID: 589446157}
-  evolveButton: {fileID: 748820054}
+  starButton: {fileID: 529434906}
   evolveText: {fileID: 1054146141}
+  evolveButton: {fileID: 748820054}
 --- !u!1001 &807478012
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3928,7 +3935,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2000009312
 RectTransform:
   m_ObjectHideFlags: 0
