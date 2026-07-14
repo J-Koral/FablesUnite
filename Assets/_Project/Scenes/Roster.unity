@@ -1720,7 +1720,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 529434907}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 795491926}
+        m_TargetAssemblyTypeName: FableDetailPanel, Assembly-CSharp
+        m_MethodName: OnStarUp
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &529434907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2596,7 +2608,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 727257417}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 795491926}
+        m_TargetAssemblyTypeName: FableDetailPanel, Assembly-CSharp
+        m_MethodName: ShowFeed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &727257417
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2792,7 +2816,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 748820055}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 795491926}
+        m_TargetAssemblyTypeName: FableDetailPanel, Assembly-CSharp
+        m_MethodName: OnEvolve
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &748820055
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2897,24 +2933,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FableDetailPanel
   panelRoot: {fileID: 2000009311}
-  rosterView: {fileID: 0}
-  bgTint: {fileID: 0}
+  rosterView: {fileID: 795491925}
+  bgTint: {fileID: 2000009313}
   artImage: {fileID: 885688236}
   elementIcon: {fileID: 569865949}
   nameText: {fileID: 344524741}
   starsText: {fileID: 974993428}
-  ratingText: {fileID: 0}
+  ratingText: {fileID: 245745177}
   elementIcons: {fileID: 1422350304}
-  hpText: {fileID: 0}
-  dmgText: {fileID: 0}
-  spdText: {fileID: 0}
-  feedPanel: {fileID: 0}
-  skillPanel: {fileID: 0}
-  evolutionPanel: {fileID: 0}
+  hpText: {fileID: 846927591}
+  dmgText: {fileID: 1849149172}
+  spdText: {fileID: 1398393884}
+  feedPanel: {fileID: 1680569207}
+  skillPanel: {fileID: 1957828904}
+  evolutionPanel: {fileID: 419619289}
   levelText: {fileID: 331402516}
   xpText: {fileID: 1087287475}
   feedButton: {fileID: 1916672155}
-  starsLineText: {fileID: 0}
+  starsLineText: {fileID: 974993428}
   shardsText: {fileID: 589446157}
   starButton: {fileID: 529434906}
   evolveText: {fileID: 1054146141}
@@ -3413,7 +3449,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 873101322}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 795491926}
+        m_TargetAssemblyTypeName: FableDetailPanel, Assembly-CSharp
+        m_MethodName: ShowSkill
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &873101322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4157,7 +4205,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1191605775}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 795491926}
+        m_TargetAssemblyTypeName: FableDetailPanel, Assembly-CSharp
+        m_MethodName: Next
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1191605775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4368,7 +4428,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1253674639}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 795491926}
+        m_TargetAssemblyTypeName: FableDetailPanel, Assembly-CSharp
+        m_MethodName: Prev
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1253674639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5887,7 +5959,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1872379228}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 795491926}
+        m_TargetAssemblyTypeName: FableDetailPanel, Assembly-CSharp
+        m_MethodName: ShowEvolution
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1872379228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6008,7 +6092,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1916672156}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 795491926}
+        m_TargetAssemblyTypeName: FableDetailPanel, Assembly-CSharp
+        m_MethodName: OnFeed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1916672156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6393,7 +6489,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2000009312
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6550,7 +6646,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2091681383}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 795491926}
+        m_TargetAssemblyTypeName: FableDetailPanel, Assembly-CSharp
+        m_MethodName: Close
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2091681383
 MonoBehaviour:
   m_ObjectHideFlags: 0
