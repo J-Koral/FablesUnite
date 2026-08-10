@@ -5,7 +5,7 @@ Instructions and conventions for any Claude Code session working in this repo. R
 ## What this project is
 Fables Unite — a mobile (iOS/Android) **lane-defense + creature-collection** game built in **Unity 6.4 (URP), portrait**. Solo developer. Free-to-play, "fair F2P." The player collects **Fables** (heroes + creatures) and deploys squads to defend lanes against Dr. Vex's army; between battles they pull the **Growth Tree** (the loot engine) and upgrade Fables.
 
-Currently a **client-side vertical slice** (Phase 1). The full status of every system — built vs. planned vs. deferred — lives in `docs/GDD.md` Section 0. Trust that document over any assumptions.
+Currently a **client-side vertical slice** (Phase 1). The full status of every system — built vs. planned vs. deferred — lives in `Fables-Unite-GDD-v2.md` Section 0. Trust that document over any assumptions.
 
 ## Where things live
 - `Assets/_Project/Scripts/` — all C# gameplay scripts
