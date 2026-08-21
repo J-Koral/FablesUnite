@@ -14,6 +14,15 @@ public class TreeController : MonoBehaviour
         if (p.treeTokens <= 0) return null;
         p.treeTokens--;
 
+        FeverMeter.I?.RegisterPull();
+
+        // Fever: force a guaranteed rare for the charged pulls
+        if (FeverMeter.I != null && FeverMeter.I.ConsumeChargedPull())
+        {
+            TreeSpot rare = PickRareSpot();
+            if (rare != null) { Grant(rare); return rare; }
+        }
+
         // Pity: if we're at the threshold, force a Fable spot.
         if (p.pityCounter >= config.fablePity)
         {
@@ -70,5 +79,17 @@ public class TreeController : MonoBehaviour
     private void AddXpToAll(int n)
     {
         foreach (var o in GameData.I.player.roster) o.xp += n;
+    }
+
+    private TreeSpot PickRareSpot()
+    {
+        // prefer Fable spots; fall back to the highest-rarity spot available
+        TreeSpot best = null;
+        foreach (var s in config.spots)
+        {
+            if (s.type == TreeRewardType.Fable) return s;
+            if (best == null || s.rarity > best.rarity) best = s;
+        }
+        return best;
     }
 }

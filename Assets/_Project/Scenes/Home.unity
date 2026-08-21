@@ -2231,8 +2231,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TreeView
   config: {fileID: 11400000, guid: 9136fd9815891c012856a2791099a805, type: 2}
-  content: {fileID: 845834044}
+  spotAnchors: []
   spotPrefab: {fileID: 7159952973379813284, guid: a7e895847a5872f0d89a8edba9920e66, type: 3}
+  icons: {fileID: 0}
 --- !u!114 &470853984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2259,12 +2260,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0a1205fe6a974cc98bdc8ba1744a341, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TreePanelUI
+  treeView: {fileID: 0}
   tokenLabel: {fileID: 1507212238}
   resultBanner: {fileID: 1988536697}
-  flyIcon: {fileID: 878880898}
-  goldTarget: {fileID: 1329688150}
+  pityLabel: {fileID: 0}
+  flyMotePrefab: {fileID: 0}
+  flyLayer: {fileID: 0}
+  moteCount: 8
+  moteStagger: 0.06
+  moteDuration: 0.5
+  campTarget: {fileID: 0}
   tokenTarget: {fileID: 1813665486}
-  coinTarget: {fileID: 2016363862}
+  turfWarsTarget: {fileID: 0}
+  rosterTarget: {fileID: 0}
 --- !u!1 &512942326
 GameObject:
   m_ObjectHideFlags: 0
@@ -3336,7 +3344,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TreePullButton
   tree: {fileID: 470853984}
   ui: {fileID: 470853985}
-  interval: 0.12
+  initialDelay: 0.5
+  repeatInterval: 0.12
+  maxPullsPerHold: 15
 --- !u!1 &834915289
 GameObject:
   m_ObjectHideFlags: 0
@@ -4442,9 +4452,41 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FableDetailPanel
   panelRoot: {fileID: 1229491633}
+  heroBackdrop: {fileID: 0}
+  artImage: {fileID: 0}
+  elementIcon: {fileID: 0}
   nameText: {fileID: 1478239166}
-  statsText: {fileID: 2007937941}
-  reqText: {fileID: 1126961445}
+  starsText: {fileID: 0}
+  elementIcons: {fileID: 0}
+  hpText: {fileID: 0}
+  dmgText: {fileID: 0}
+  spdText: {fileID: 0}
+  feedPanel: {fileID: 0}
+  skillPanel: {fileID: 0}
+  evolutionPanel: {fileID: 0}
+  tabBackgrounds: []
+  tabLabels: []
+  tabIndicators: []
+  tabActiveColor: {r: 0.184, g: 0.165, b: 0.388, a: 1}
+  tabInactiveColor: {r: 0.1, g: 0.1, b: 0.13, a: 1}
+  tabActiveText: {r: 1, g: 1, b: 1, a: 1}
+  tabInactiveText: {r: 0.53, g: 0.52, b: 0.56, a: 1}
+  levelText: {fileID: 0}
+  xpText: {fileID: 0}
+  xpBar: {fileID: 0}
+  feedButton: {fileID: 0}
+  starsLineText: {fileID: 0}
+  shardsText: {fileID: 0}
+  shardBar: {fileID: 0}
+  starButton: {fileID: 0}
+  starGlow: {fileID: 0}
+  evolveText: {fileID: 0}
+  evolveButton: {fileID: 0}
+  rosterView: {fileID: 0}
+  shakeTarget: {fileID: 0}
+  panelBackground: {fileID: 0}
+  starGlowImage: {fileID: 0}
+  shakeMagnitude: 18
 --- !u!114 &1229491636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4910,6 +4952,153 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1358797161}
   m_CullTransparentMesh: 1
+--- !u!1 &1365121850
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1365121853}
+  - component: {fileID: 1365121852}
+  - component: {fileID: 1365121851}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1365121851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1365121850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73e4c7e6984a8cb80ba48905bcfbacf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AudioManager
+  source: {fileID: 0}
+  pull: {fileID: 8300000, guid: ed8cf30400a4b877496af2172824f7a2, type: 3}
+  starUp: {fileID: 8300000, guid: 16d6bc58521251b85bd7d5b7163a0c64, type: 3}
+  evolve: {fileID: 8300000, guid: d04c7f30e230b5255a1c2d42d231d476, type: 3}
+  feed: {fileID: 8300000, guid: d560057c343c349d49a441f1df4e4906, type: 3}
+--- !u!82 &1365121852
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1365121850}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &1365121853
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1365121850}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 384.2226, y: -0.00001, z: 4554.5547}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1427957951
 GameObject:
   m_ObjectHideFlags: 0
@@ -6276,6 +6465,7 @@ MonoBehaviour:
   content: {fileID: 1879264241}
   cardPrefab: {fileID: 9042391930151508351, guid: 7dcfce086b3356672ad2e79fdde00915, type: 3}
   detailPanel: {fileID: 1229491635}
+  elementIcons: {fileID: 0}
 --- !u!1 &1879264240
 GameObject:
   m_ObjectHideFlags: 0
@@ -7364,3 +7554,4 @@ SceneRoots:
   - {fileID: 1849432070}
   - {fileID: 248724474}
   - {fileID: 1477424232148645125}
+  - {fileID: 1365121853}

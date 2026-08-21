@@ -7,6 +7,7 @@ public class TreePanelUI : MonoBehaviour
     public TreeView treeView;
     public TMP_Text tokenLabel;
     public TMP_Text resultBanner;      // optional
+    public TMP_Text pityLabel;         // NEW: "Guaranteed Fable in N"
 
     [Header("Marching-ants collect")]
     public FlyMote flyMotePrefab;      // the small UI-image prefab
@@ -75,5 +76,18 @@ public class TreePanelUI : MonoBehaviour
     {
         if (tokenLabel != null && GameData.I != null)
             tokenLabel.text = "Tokens: " + GameData.I.player.treeTokens;
+
+        // NEW: pity readout
+        if (pityLabel != null && GameData.I != null
+            && treeView != null && treeView.config != null)
+        {
+            int remaining = Mathf.Max(0, treeView.config.fablePity - GameData.I.player.pityCounter);
+            pityLabel.text = "Guaranteed Fable in " + remaining;
+        }
+    }
+
+    private void Start()
+    {
+        RefreshTokens();
     }
 }

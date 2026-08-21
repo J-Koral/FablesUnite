@@ -50,6 +50,16 @@ public class FableDetailPanel : MonoBehaviour
     [Header("Grid refresh")]
     public RosterView rosterView;   // refresh the grid on close (e.g. after evolve)
 
+    [Header("Juice")]
+    public RectTransform shakeTarget;   // drag the DetailPanel's RectTransform here
+    public Image panelBackground;       // drag the DetailPanel Image (#16151C) here
+    public Image starGlowImage;         // drag the Image on StarGlow here
+    public float shakeMagnitude = 18f;
+
+    private bool starBursting = false;
+
+    private Coroutine xpTween;
+
     private int index = -1;
 
     private OwnedFable Current =>
@@ -132,7 +142,12 @@ public class FableDetailPanel : MonoBehaviour
         // Feed tab
         if (levelText != null) levelText.text = "Level " + o.level;
         if (xpText != null)    xpText.text    = o.xp + " / " + FableUpgrade.XpPerLevel + " XP";
-        if (xpBar != null)     xpBar.fillAmount = Mathf.Clamp01(o.xp / (float)FableUpgrade.XpPerLevel);
+        if (xpBar != null)
+        {
+            float target = Mathf.Clamp01(o.xp / (float)FableUpgrade.XpPerLevel);
+            if (xpTween != null) StopCoroutine(xpTween);
+            xpTween = StartCoroutine(TweenFill(xpBar, target));
+        }
         if (feedButton != null) feedButton.interactable = o.xp >= FableUpgrade.XpPerLevel;
 
         // Evolve tab — star-up
@@ -156,20 +171,139 @@ public class FableDetailPanel : MonoBehaviour
     // makes the Star Up glow gently pulse while it's active
     private void Update()
     {
-        if (starGlow != null && starGlow.activeSelf)
+        if (starGlow != null && starGlow.activeSelf && !starBursting)
         {
             float s = 1f + 0.06f * Mathf.Sin(Time.unscaledTime * 6f);
             starGlow.transform.localScale = new Vector3(s, s, 1f);
         }
     }
 
-    public void OnFeed()   { var o = Current; if (o != null && FableUpgrade.TryLevelUp(o)) Refresh(); }
-    public void OnStarUp() { var o = Current; if (o != null && FableUpgrade.TryStarUp(o, GameData.I.database.Get(o.definitionId))) Refresh(); }
-    public void OnEvolve() { var o = Current; if (o != null && FableUpgrade.TryEvolve(o, GameData.I.database)) Refresh(); }
+
+    public void OnFeed()
+    {
+        var o = Current;
+        if (o != null && FableUpgrade.TryLevelUp(o))
+        {
+            Refresh();
+            if (hpText  != null) StartCoroutine(Punch(hpText.transform));
+            if (dmgText != null) StartCoroutine(Punch(dmgText.transform));
+            AudioManager.I?.Play(AudioManager.I.feed);   // enable after Part 4
+        }
+    }
+    
+    public void OnStarUp()
+    {
+        var o = Current;
+        if (o != null && FableUpgrade.TryStarUp(o, GameData.I.database.Get(o.definitionId)))
+        {
+            Refresh();
+            StartCoroutine(StarBurst());
+            StartCoroutine(Shake(shakeTarget, 0.25f, shakeMagnitude));
+            AudioManager.I?.Play(AudioManager.I.starUp);   // enable after Part 4
+        }
+    }
+
+    public void OnEvolve()
+    {
+        var o = Current;
+        if (o != null && FableUpgrade.TryEvolve(o, GameData.I.database))
+        {
+            Refresh();
+            StartCoroutine(EvolveFlash());
+            StartCoroutine(Shake(shakeTarget, 0.35f, shakeMagnitude * 1.4f));
+            AudioManager.I?.Play(AudioManager.I.evolve);   // enable after Part 4
+        }
+    }
 
     private string StarString(int stars, int max)
     {
         stars = Mathf.Clamp(stars, 0, max);
         return new string('\u2605', stars) + new string('\u2606', Mathf.Max(0, max - stars));
     }
+
+    private System.Collections.IEnumerator Shake(RectTransform rt, float dur, float mag)
+    {
+        if (rt == null) yield break;
+        Vector2 origin = rt.anchoredPosition;
+        float e = 0f;
+        while (e < dur)
+        {
+            e += Time.unscaledDeltaTime;
+            float damper = 1f - (e / dur);
+            rt.anchoredPosition = origin + new Vector2(
+                Random.Range(-1f, 1f) * mag * damper,
+                Random.Range(-1f, 1f) * mag * damper);
+            yield return null;
+        }
+        rt.anchoredPosition = origin;
+    }
+
+    private System.Collections.IEnumerator StarBurst()
+    {
+        if (starGlow == null) yield break;
+        starBursting = true;
+
+        Image img = starGlowImage != null ? starGlowImage : starGlow.GetComponent<Image>();
+        Transform t = starGlow.transform;
+        Color baseCol = img != null ? img.color : Color.white;   // remembers the a160 rest state
+
+        float dur = 0.35f, e = 0f;
+        while (e < dur)
+        {
+            e += Time.unscaledDeltaTime;
+            float k = e / dur;
+            float scale = Mathf.Lerp(1.6f, 1f, k);              // big → settle
+            t.localScale = new Vector3(scale, scale, 1f);
+            if (img != null)
+            {
+                float a = Mathf.Lerp(1f, baseCol.a, k);         // full → back to 160
+                img.color = new Color(baseCol.r, baseCol.g, baseCol.b, a);
+            }
+            yield return null;
+        }
+        t.localScale = Vector3.one;
+        if (img != null) img.color = baseCol;
+        starBursting = false;
+    }
+
+    private System.Collections.IEnumerator EvolveFlash()
+    {
+        if (panelBackground == null) yield break;
+        Color baseCol = panelBackground.color;   // your #16151C
+        float dur = 0.5f, e = 0f;
+        while (e < dur)
+        {
+            e += Time.unscaledDeltaTime;
+            panelBackground.color = Color.Lerp(Color.white, baseCol, e / dur);
+            yield return null;
+        }
+        panelBackground.color = baseCol;
+    }
+
+    private System.Collections.IEnumerator Punch(Transform t)
+    {
+        float dur = 0.25f, e = 0f;
+        while (e < dur)
+        {
+            e += Time.unscaledDeltaTime;
+            float k = e / dur;
+            float s = 1f + 0.35f * Mathf.Sin(k * Mathf.PI);   // scale up then back to 1
+            t.localScale = new Vector3(s, s, 1f);
+            yield return null;
+        }
+        t.localScale = Vector3.one;
+    }
+
+    private System.Collections.IEnumerator TweenFill(Image bar, float target)
+    {
+        float start = bar.fillAmount, e = 0f, dur = 0.3f;
+        while (e < dur)
+        {
+            e += Time.unscaledDeltaTime;
+            bar.fillAmount = Mathf.Lerp(start, target, e / dur);
+            yield return null;
+        }
+        bar.fillAmount = target;
+    }
+
 }

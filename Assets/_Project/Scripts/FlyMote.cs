@@ -24,8 +24,24 @@ public class FlyMote : MonoBehaviour
         float wait = 0f;                    // wait our turn in the marching line
         while (wait < delay) { wait += Time.unscaledDeltaTime; yield return null; }
 
+        // --- anticipation: pop away from the target, hover, THEN fly in ---
+        Vector3 away = (start - end).normalized * 40f;   // outward from the target
+        Vector3 popTo = rt.position + away;
+        float pd = 0.12f, pe = 0f;
+        Vector3 popFrom = rt.position;
+        while (pe < pd)
+        {
+            pe += Time.unscaledDeltaTime;
+            float pk = pe / pd;
+            rt.position   = Vector3.Lerp(popFrom, popTo, pk);
+            rt.localScale = Vector3.one * Mathf.Lerp(0.55f, 0.75f, pk);   // swell slightly
+            yield return null;
+        }
+        yield return new WaitForSecondsRealtime(0.05f);   // brief hover
+
         Vector3 from = rt.position;
         float t = 0f;
+
         while (t < duration)
         {
             t += Time.unscaledDeltaTime;

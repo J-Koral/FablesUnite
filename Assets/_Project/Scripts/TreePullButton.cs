@@ -14,10 +14,12 @@ public class TreePullButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
 
     private Coroutine repeatRoutine;
     private int pullsThisHold;
+    private int consecutive;
 
     public void OnPointerDown(PointerEventData e)
     {
         pullsThisHold = 0;                               // fresh count each press
+        consecutive = 0;
         DoPull();                                        // exactly ONE pull on press
         repeatRoutine = StartCoroutine(RepeatAfterDelay());
     }
@@ -47,10 +49,20 @@ public class TreePullButton : MonoBehaviour, IPointerDownHandler, IPointerUpHand
     private void DoPull()
     {
         if (tree == null) return;
-        if (pullsThisHold >= maxPullsPerHold) return;    // safety: never exceed the cap
-        TreeSpot spot = tree.Pull();
-        if (spot == null) return;                        // out of tokens: stop quietly
-        pullsThisHold++;                                 // only count successful pulls
-        if (ui != null) ui.ShowResult(spot);
+        int mult = (PullMultiplier.I != null) ? PullMultiplier.I.Current : 1;
+
+        for (int m = 0; m < mult; m++)
+        {
+            if (pullsThisHold >= maxPullsPerHold) return;
+            TreeSpot spot = tree.Pull();
+            if (spot == null) return;
+            pullsThisHold++;
+            if (ui != null) ui.ShowResult(spot);
+
+            consecutive++;
+            float pitch = Mathf.Min(1f + consecutive * 0.04f, 2f);
+            AudioManager.I?.Play(AudioManager.I.pull, pitch);
+        }
     }
+
 }
